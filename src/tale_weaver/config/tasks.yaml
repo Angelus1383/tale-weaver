@@ -1,0 +1,58 @@
+create_story:
+  description: >
+    Generate an original, magical, and uplifting children’s storybook in {language}, consisting of exactly {pageCount} pages. 
+    The narrative should be non-trivial, incorporating a clear challenge, an active antagonist, or meaningful obstacles for adventure.
+
+    ## STORY STRUCTURE
+    Ensure the following silent structure across the specified page count:
+      - Beginning (pages 1-2): Start with a warm hook by introducing the hero, their goal, and an intriguing clue or symbol.
+      - Middle (pages 3-{penultimatePage}): Present two or more try-fail mini-adventures, escalating the stakes. The midpoint should reveal a twist. Place at least three meaningful clues throughout these pages, ensuring each clue is paid off later. Every page must develop the plot or change the situation.
+      - End (last page): Cleverly resolve the central mystery using the established clues and provide a concluding image of wonder.
+      
+    ## CHARACTER DESCRIPTIONS
+    For each main character, include:
+      - Name and role/personality
+      - Physical appearance: clothing (items and colors), hairstyle (color and length), eye color, facial features, height/build, and species (if non-human)
+      - Unique traits or memorable accessories
+
+    ## PAGE ANNOTATION
+    For every page, provide:
+      - Exactly 4 simple sentences as the scene text.
+      - List of character names appearing in the scene.
+      - A vivid, detailed scene description covering atmosphere, location, mood, and setting
+
+    ## PROMPTS FOR ILLUSTRATION
+    Write narrative, child-friendly illustration prompts in English language for each `storybook_prompt`, `scene_prompt`, and `character_prompt`:
+    - ALWAYS start prompts with this exact words: "Create a picture ..." and end with "The image MUST be 724x1024 px." Provide a descriptive paragraph (not a tag list).
+    - Faithfully depict scenes using subject & action, setting/era, composition/camera angle, mood, palette & lighting, and layout hints.
+    - Strictly adhere to character canon: include ALL present characters (with exact names) and restate their canonical traits. Do not introduce new characters.
+    - For each `character_prompt`, use a simple, neutral background (plain light studio or paper texture) to highlight the single subject. Avoid extra characters or background scenes and describe the character in a neutral pose.
+    - For the `storybook_prompt`, include the storybook’s title at the bottom, specifying a clean, bold sans-serif font and instructing proper spelling.
+    - For all `scene_prompt` for each characters present in a scene describe clearly their spatial placement, depict accurately their body pose, gestures, actions and visible interactions. Outline the relative size and maintain consistency among characters dimensions.
+    - Use an illustration-forward style for children (e.g., "storybook illustration, whimsical, rounded forms, clean lines, gentle expressions") and avoid photorealism unless specifically requested.
+    - Maintain continuity in every image: outfits, color schemes, proportions among characters, sizes, props, and time of day should remain consistent.
+    - Ensure age-appropriate and safe content: no gore, realistic weapons, or frightening imagery.
+    - Clearly state that images must fill the entire space—no empty areas.
+    - End each prompt with a negative prompt clause, e.g., "no photorealism, no text overlays, no logos, no signage, no trademarks, no watermarks, no adult themes, avoid empty areas."
+    - Use style shortcuts as appropriate: pick ONE primary visual style per book for consistency ("storybook illustration," "children’s book," "soft shading," "flat colors," "watercolor wash," or "vector-like clean shapes").
+
+    Use clear, vivid, and concrete language. Avoid keyword lists; prioritize descriptive scene narrative. Use English language for each `storybook_prompt`, `scene_prompt`, and `character_prompt`
+    
+    ## STYLE RULES AND GUARDRAILS:
+      - [Arc] Make inciting incident, rising tension, twist, and resolution clear in the narrative.
+      - [Payoff] Ensure early clues appear again and resolve the mystery.
+      - [Change] Each page must progress the plot or reveal new information.
+      - [Style] Keep tone warm, playful, and inspirational; language should be accessible for young readers.
+      
+  expected_output: >
+    A complete storybook with exactly ${pageCount} pages in the language: {language}. Do not include any instructions or text outside the story itself.
+  agent: storyteller
+
+create_illustration:
+  description: >
+    Use the `Illustration_tool` to create illustrations for the storybook from the context of the previous task.
+  expected_output: >
+    The Storybook returned by the tool.
+  agent: illustrator
+  context: 
+    - create_story

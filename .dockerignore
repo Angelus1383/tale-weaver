@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.conda/
+.venv/
+.env
+
+# VCS / editor
+.git
+.gitignore
+.vscode/
+.idea/
+
+# Dati e build output
+*.log
+logs.json
+
+# OS
+.DS_Store
